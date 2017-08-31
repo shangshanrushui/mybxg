@@ -50,7 +50,7 @@
                                 <th>操作</th>
                             </tr>
                         </thead>
-                        <tbody id="templateIdof">
+                        <tbody id="templateInfo">
                            
                         </tbody>
                     </table>
@@ -69,15 +69,14 @@
                 </div>
                 <div class="panel-body">
                     <table class="table table-bordered table-condensed" id="modalIdof">
-                        
+                    
                     </table>
                 </div>
             </div>
         </div>
     </div>
     
-   <!--  <script type="text/template" id="modalTpl">
-        {{each list}}
+    <script type="text/template" id="modalTpl">
         <tbody>
             <tr>
                 <th>姓名:</th><td>{{tc_name}}</td>
@@ -87,7 +86,7 @@
                         {{if tc_avatar}}
                             <img src="{{tc_avatar}}" alt="">
                         {{else}}
-                        <img src="/public/images/default.png" alt="">
+                            <img src="/public/images/default.png" alt="">
                         {{/if}}
                     </div>
                 </td>
@@ -97,12 +96,13 @@
                 <th>出生日期:</th><td colspan="3">{{tc_join_date}}</td>
             </tr>
             <tr>
-                <th>性别:</th><td>
-                    {{if tc_gender ==1}}
+                <th>性别:</th>
+                <td>
+                    {{if tc_gender == 0}}
                         男
                     {{else}}
                         女
-                    {/if}
+                    {{/if}}
                 </td>
                 <th>出生日期:</th><td colspan="3">{{tc_birthday}}</td>
             </tr>
@@ -116,13 +116,13 @@
             <tr>
                 <td colspan="7">
                     <div class="introduce">
-                        {{#tc_introduce}}
+                        {{@ tc_introduce}}
                     </div>
                 </td>
             </tr>
         </tbody>
-        {{/each}}
-    </script> -->
+    </script>
+
     <script type="text/template" id="templateTpl">
         {{each list}}
         <tr>
@@ -131,21 +131,21 @@
             <td>{{$value.tc_roster}}</td>
             <td>{{$value.tc_join_date}}</td>
             <td>
-                {{if tc_gender == 1}}
-                男
+                {{if $value.tc_gender == 1}}
+                    男
                 {{else}}
-                女
+                    女
                 {{/if}}
             </td>
-            <td>{{tc_cellphone}}</td>
-            <td>
-                <a href="#teacherModal" data-toggle="modal" class="btn btn-info btn-xs">查 看</a>
+            <td>{{$value.tc_cellphone}}</td>
+            <td data-tcId="{{$value.tc_id}}" data-status="{{$value.tc_status}}" >
+                <a href="javascript:;"  class="btn btn-info btn-xs preveiw">查 看</a>
                 <a href="./teacher_add.html" class="btn btn-info btn-xs">编 辑</a>
-                <a href="javascript::" class="btn btn-warning btn-xs">
+                <a href="javascript:;" class="btn btn-warning btn-xs eod">
                     {{if $value.tc_status == 0}}
-                    注 销
+                        注 销
                     {{else}}
-                    启用
+                        启用
                     {{/if}}
                 </a>
             </td>
