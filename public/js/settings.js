@@ -1,4 +1,4 @@
-define(['jquery','template','util','datepicker','language','uploadify'],function($,template,util){
+define(['jquery','template','util','datepicker','language','uploadify','region'],function($,template,util){
 	//设置导航菜单
 	util.setMenu('/main/index');
 	//
@@ -7,10 +7,10 @@ define(['jquery','template','util','datepicker','language','uploadify'],function
 		url : '/api/teacher/profile',
 		dataType : 'json',
 		success : function(data){
-			console.log(data);
+			// console.log(data);
 			var html = template("settingsTpl",data.result);
 			$('#settingsInfo').html(html);	
-			
+
 			//上传图像
 			$('#upfile').uploadify({
 				width:120,
@@ -26,6 +26,9 @@ define(['jquery','template','util','datepicker','language','uploadify'],function
 					$('.preview img').attr('src',data.result.path);
 				}
 			});
+			$("#pcd").region({
+				url:'/public/assets/jquery-region/region.json' 
+			})
 		}
 
 	})
