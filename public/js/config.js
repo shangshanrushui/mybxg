@@ -9,14 +9,15 @@ require.config({
 		bootstrap: 'bootstrap/js/bootstrap.min',
 		datepicker: 'bootstrap-datepicker/js/bootstrap-datepicker.min',
 		language: 'bootstrap-datepicker/locales/bootstrap-datepicker.zh-CN.min',
+		validate: 'validate/jquery-validate.min',
+		form: 'jquery-form/jquery.form',
 		common : '../js/common',
 		login : '../js/login',
 		index : '../js/index',
 		teacherlist : '../js/teacher-list',
 		teacheradd:'../js/teacher-add',
 		util: '../js/util',
-		validate: 'validate/jquery-validate.min',
-		form: 'jquery-form/jquery.form'
+		settings: '../js/settings'
 	},
 	shim:{
 		bootstrap : {
