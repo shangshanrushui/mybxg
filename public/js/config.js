@@ -15,8 +15,8 @@ require.config({
 		teacherlist : '../js/teacher-list',
 		teacheradd:'../js/teacher-add',
 		util: '../js/util',
-		validate: 'validate/jquery-validate.min'
-
+		validate: 'validate/jquery-validate.min',
+		form: 'jquery-form/jquery.form'
 	},
 	shim:{
 		bootstrap : {
