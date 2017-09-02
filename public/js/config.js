@@ -14,7 +14,9 @@ require.config({
 		index : '../js/index',
 		teacherlist : '../js/teacher-list',
 		teacheradd:'../js/teacher-add',
-		util: '../js/util'
+		util: '../js/util',
+		validate: 'validate/jquery-validate.min'
+
 	},
 	shim:{
 		bootstrap : {
@@ -22,6 +24,9 @@ require.config({
 		},
 		language:{
 			deps:['jquery','datepicker']
+		},
+		validate:{
+			deps:['jquery']
 		}
 	}
 });
