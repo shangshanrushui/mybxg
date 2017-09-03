@@ -1,4 +1,4 @@
-define(['jquery','template','util','datepicker','language','uploadify','region'],function($,template,util){
+define(['jquery','template','util','ckeditor','datepicker','language','uploadify','region'],function($,template,util,CKEDITOR){
 	//设置导航菜单
 	util.setMenu('/main/index');
 	//
@@ -13,22 +13,30 @@ define(['jquery','template','util','datepicker','language','uploadify','region']
 
 			//上传图像
 			$('#upfile').uploadify({
-				width:120,
-				height:120, //图片的宽高
-				buttonText:'', //文本内容
-				itemTemplate:'<span></span>', //提示信息
-				fileObjName:'tc_avatar', //
-				swf:'/public/assets/jquery-uploadify/uploadify.swf',
+				width : 120,
+				height : 120, //图片的宽高
+				buttonText : '', //文本内容
+				itemTemplate : '<span></span>', //提示信息
+				fileObjName :'tc_avatar', //
+				swf :'/public/assets/uploadify/uploadify.swf',
 				uploader:'/api/uploader/avatar',  // 后台地址
 				onUploadSuccess:function(f,data){
-					console.log(data)
+					// console.log(data)
 					var data =JSON.parse(data);
 					$('.preview img').attr('src',data.result.path);
 				}
 			});
+			//处理省市区三级联动
 			$("#pcd").region({
 				url:'/public/assets/jquery-region/region.json' 
-			})
+			});
+			//处理付文本
+			CKEDITOR.replace('editor',{
+				toolbarGroups : [
+					{ name: 'clipboard', groups: [ 'clipboard', 'undo' ] },
+					{ name: 'editing', groups: [ 'find', 'selection', 'spellchecker', 'editing' ] }
+				]
+			});
 		}
 
 	})

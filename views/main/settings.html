@@ -39,7 +39,7 @@
                                 {{if tc_avatar}}
                                      <img src="{{tc_avatar}}">
                                 {{else}}
-                                <img src="/public/images/default.png">
+                                    <img src="/public/images/default.png">
                                 {{/if}}
                                 <input type="file" id="upfile">
                                 <div class="cover">
@@ -104,8 +104,8 @@
                         </div>
                         <div class="form-group">
                             <label for="" class="col-xs-3 control-label">个人介绍</label>
-                            <div class="col-xs-5 ckeditor">
-                                <textarea rows="15" name="tc_introduce" class="form-control input-sm">
+                            <div class="col-xs-5 ckeditor" >
+                                <textarea rows="15" id="editor" name="tc_introduce" class="form-control input-sm">
                                     {{tc_introduce}}
                                 </textarea>
                             </div>
