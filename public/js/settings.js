@@ -1,4 +1,4 @@
-define(['jquery','template','util','ckeditor','datepicker','language','uploadify','region'],function($,template,util,CKEDITOR){
+define(['jquery','template','util','ckeditor','datepicker','language','uploadify','region','validate','form'],function($,template,util,CKEDITOR){
 	//设置导航菜单
 	util.setMenu('/main/index');
 	//
@@ -30,14 +30,39 @@ define(['jquery','template','util','ckeditor','datepicker','language','uploadify
 			$("#pcd").region({
 				url:'/public/assets/jquery-region/region.json' 
 			});
-			//处理付文本
+			//处理附文本
 			CKEDITOR.replace('editor',{
 				toolbarGroups : [
 					{ name: 'clipboard', groups: [ 'clipboard', 'undo' ] },
 					{ name: 'editing', groups: [ 'find', 'selection', 'spellchecker', 'editing' ] }
 				]
 			});
+			//提交菜单
+			$('#settingForm').validate({
+				sendForm: false,
+				valid : function(){
+					//修改附文本信息到textarea中
+					// for(var instance in CKEDITOR.instances){
+					// 	CKEDITOR.instances[instance].updateElement();
+					// }
+					var p = $('#p').find('option:selected').text();
+					var c = $('#c').find('option:selected').text();
+					var d = $('#d').find('option:selected').text();
+					var hometown = p + '|' + c + '|' +d;
+					$(this).ajaxSubmit({
+						type: 'post',
+						url: '/api/teacher/modify',
+						data: {tc_hometown:hometown},
+						dataType : 'json',
+						success:function(data){
+							if(data.code == 200){
+								location.reload();
+							}
+						}
+					});
+				}
+			});
 		}
 
-	})
-})
+	});
+});
