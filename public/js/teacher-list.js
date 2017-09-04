@@ -1,4 +1,4 @@
-define(['jquery','template','util','bootstrap'],function($,template,util){
+define(['jquery','template','util','bootstrap','state'],function($,template,util){
 
 	//设置左侧菜单高量显示
 	util.setMenu(location.pathname);

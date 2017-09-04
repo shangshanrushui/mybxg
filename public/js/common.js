@@ -1,6 +1,7 @@
-define(['jquery','template','cookie'],function($,template){
-		//NProgress.start();
-		//NProgress.done();
+define(['jquery','template','nprogress','cookie',],function($,template,NProgress){
+		//加载状态
+		NProgress.start();
+		NProgress.done();
 	//控制主页菜单折叠和展开
 	$('.navs ul').prev('a').on('click', function () {
 			$(this).next().slideToggle();
