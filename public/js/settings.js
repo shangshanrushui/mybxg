@@ -40,15 +40,16 @@ define(['jquery','template','util','ckeditor','datepicker','language','uploadify
 			//提交菜单
 			$('#settingForm').validate({
 				sendForm: false,
-				valid : function(){
-					//修改附文本信息到textarea中
-					// for(var instance in CKEDITOR.instances){
-					// 	CKEDITOR.instances[instance].updateElement();
-					// }
+				valid : function(){console.log('表单有效');
+					// 修改附文本信息到textarea中
+					for(var instance in CKEDITOR.instances){
+						CKEDITOR.instances[instance].updateElement();
+					}
 					var p = $('#p').find('option:selected').text();
 					var c = $('#c').find('option:selected').text();
 					var d = $('#d').find('option:selected').text();
 					var hometown = p + '|' + c + '|' +d;
+					// debugger;
 					$(this).ajaxSubmit({
 						type: 'post',
 						url: '/api/teacher/modify',
