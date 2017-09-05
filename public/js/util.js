@@ -1,7 +1,7 @@
 define(['jquery'],function($){
 	return {
 		setMenu :function (path){
-			$('.navs a[href="'+path+'"]').addClass('active');
+			$('.navs a[href="'+path+'"]').addClass('active').closest('ul').show();
 		},
 		qs : function(key){
 			//获取url中指定的参数值
