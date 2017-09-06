@@ -36,14 +36,22 @@ define(['jquery','template','util','validate','form'],function($,template,util){
 				});
 
 				//提交
-				// $('#basicForm').validate({
-				// 	sendForm:false,
-				// 	valid:function(){
-				// 		$(this).ajaxSubmit({
-				// 			type:''
-				// 		})
-				// 	}
-				// })
+				$('#basicForm').validate({
+					sendForm:false,
+					valid:function(){
+						$(this).ajaxSubmit({
+							type:'post',
+							url:'/api/course/update/basic',
+							data:{cs_id:csId},
+							dataType:'json',
+							success:function(data){
+								if(data.code == 200){
+									location.href='/course/picture?cs_id='+data.result.cs_id;
+								}
+							}
+						})
+					}
+				})
 
 			}
 		});
