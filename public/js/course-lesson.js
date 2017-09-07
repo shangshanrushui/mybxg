@@ -1,4 +1,4 @@
-define(['jquery','template','util','bootstrap'],function($,template,util,bootstrap){
+define(['jquery','template','util','bootstrap','form'],function($,template,util,bootstrap){
 	util.setMenu('/course/list');
 	var csId = util.qs('cs_id');
 	$.ajax({
@@ -12,31 +12,47 @@ define(['jquery','template','util','bootstrap'],function($,template,util,bootstr
 			$('#templateInfo').html(html);
 
 			//提交表单公共方法
-			// function submitForm(url,ctCsId,ctId){
-			// 	$('#m')
-			// }
+			function submitForm(url,ctCsId,ctId){
+				$('#modalBtn').click(function(){
+					var param ={ct_cs_id:ctCsId};
+					if (ctId) {
+						//编辑的时候需要提供课时ID
+						param.ct_id=ctId;
+					}
+					$('#modalForm').ajaxSubmit({
+						type:'post',
+						url:url,
+						data: param,
+						dataType:'json',
+						success:function(data){
+							if (data.code==200) {
+								location.reload();
+							}
+						}
+					})
+				})
+			}
 
 			//实现课程添加课时功能
 			$('#addBtn').click(function(){
 				var html =template('modalTpl',{operate:'添加课时'});
 				$('#modalInfo').html(html);
 				$('#chapterModal').modal();
-
+				submitForm('/api/course/chapter/add',csId);
 			});
 			$('.editLesson').click(function(){
 				var ctId =$(this).attr('data-ctId');
-				console.log(ctId);
 				$.ajax({
 					type:'get',
 					url:'/api/course/chapter/edit',
-					data:{ct_id:csId},
+					data:{ct_id:ctId},
 					dataType:'json',
 					success:function(data){
 						console.log(data);
 						data.result.operate='编辑课时';
 						var html =template('modalTpl',data.result);
 						$('#modalInfo').html(html);
-						//submitForm('/api/course/chapter/modify',csId,ctId);
+						submitForm('/api/course/chapter/modify',csId,ctId);
 					}
 				});
 				//显示弹窗
